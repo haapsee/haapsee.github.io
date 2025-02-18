@@ -46,7 +46,7 @@ function App() {
                     {Object.keys(data?.preferredLanguages || {}).sort((a, b) => {
                         return parseFloat(data?.preferredLanguages[b]) - parseFloat(data?.preferredLanguages[a]);
                     }).map((lang, index) => (
-                        <li key={index} className="skill"><span style={{backgroundColor: randomColor()}}>{lang}: {data?.preferredLanguages[lang]?.toFixed(2)}%</span></li> 
+                        <li key={index} className="skill"><span style={{backgroundColor: randomColor()}}>{lang}</span></li> 
                     ))}
                     </ul>
                 </section>
