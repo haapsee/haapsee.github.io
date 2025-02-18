@@ -23,7 +23,6 @@ function randomColor() {
 }
 
 function App() {
-    console.log(data);
     return (
         <section className="container">
             <section className="section header" style={{"display": "flex", "justifyContent": "space-between"}}>

@@ -30,8 +30,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install --save-dev
-      - run: npm run receive
-      - run: npm run build
+      - name: Receive data
+        run: npm run receive
+        env:
+          GITHUBUSER: ${{ env.GITHUBUSER }}
+          GITHUBTOKEN: ${{ env.GITHUBTOKEN }}
+      - name: Build
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
