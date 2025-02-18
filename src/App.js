@@ -32,6 +32,7 @@ function App() {
                     <p style={{"color": "gray", fontSize: "0.7rem"}}>Following: {data?.user?.following}, Followers: {data?.user?.followers}</p>
                     <p>{data?.user?.bio}</p>
                     <ul>
+                        <li><a href={data?.user?.html_url}>github</a></li>
                         {data?.socialAccounts?.map((account, index) => (
                             <li key={index}><a href={account.url}>{account.provider}</a></li>
                         ))}
@@ -58,7 +59,7 @@ function App() {
                     {data?.portfolioRepos?.map((repo, index) => (
                         <div key={index} className="project-card">
                             <h3 className="project-name">{repo.name}</h3>
-                            <p className='project-license'>{repo.license}</p>
+                            <p className='project-license'>{repo.license?.name}</p>
                             <p className='project-description'>{repo.description}</p>
                             <p className='project-languages'>{repo.languages.map((lang, index) => (
                                 <span key={index} className="language"><span>{lang}</span></span>

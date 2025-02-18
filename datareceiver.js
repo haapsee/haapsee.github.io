@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import * as fs from "fs";
 
-const username = 'haapsee';
+const username = process.env.GITHUBUSER;
 
 const octokit = new Octokit({
     auth: process.env.GITHUBTOKEN,
@@ -132,6 +132,12 @@ function filterPortfolioRepos(repos) {
         .filter(repo => repo.topics.includes('portfolio-project'));
 }
 
+/**
+ * Writes data to a specified file.
+ *
+ * @param {string} data - The data to be written to the file.
+ * @param {string} filename - The name of the file to write the data to.
+ */
 function writeToFile(data, filename) {
     fs.writeFile(filename, data, (err) => {
         if (err) {
@@ -142,26 +148,12 @@ function writeToFile(data, filename) {
     });
 }
 
-// Get the user data
-let data = await getUserData(username);
-let user = data.data;
-
-data = await getUserSocialAccounts(username);
-let socialAccounts = data.data;
-
-data = await getUserOrganisations(username);
-let orgs = data;
-
-data = await getUserRepos(username);
-let repos = data.data;
+let user = (await getUserData(username)).data;
+let socialAccounts = (await getUserSocialAccounts(username)).data;
+let orgs = (await getUserOrganisations(username)).data;
+let repos = (await getUserRepos(username)).data;
 let portfolioRepos = filterPortfolioRepos(repos);
 let preferredLanguages = await getUserPreferredLanguages(repos);
-
-console.log("User:\n", user, "\n\n");
-console.log("Social Accounts:\n", socialAccounts, "\n\n");
-console.log("Organisations:\n", orgs, "\n\n");
-console.log("Repositories:\n", portfolioRepos, "\n\n");
-console.log("Languages:\n", preferredLanguages, "\n\n");
 
 
 writeToFile(JSON.stringify({ user, orgs, portfolioRepos, preferredLanguages, socialAccounts }), 'src/data.json');
