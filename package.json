@@ -16,7 +16,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "receive": "node --env-file=.env datareceiver.js",
+    "receive": "node datareceiver.js",
     "start": "react-scripts  start",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
