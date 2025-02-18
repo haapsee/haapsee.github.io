@@ -31,10 +31,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install --save-dev
       - name: Receive data
-        run: GITHUBUSER=$user GITHUBTOKEN=$token npm run receive
+        run: GITHUBUSER=$GITHUBUSER GITHUBTOKEN=$GITHUBTOKEN npm run receive
         env:
-          user: ${{ env.GITHUBUSER }}
-          token: ${{ env.GITHUBTOKEN }}
+          GITHUBUSER: ${{ vars.GITHUBUSER }}
+          GITHUBTOKEN: ${{ vars.GITHUBTOKEN }}
       - name: Build
         run: npm run build
 
