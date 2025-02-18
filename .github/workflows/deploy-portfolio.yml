@@ -33,7 +33,7 @@ jobs:
       - name: Receive data
         run: GITHUBUSER=$user GITHUBTOKEN=$token npm run receive
         env:
-          user: haapsee
+          user: ${{ env.GITHUBUSER }}
           token: ${{ env.GITHUBTOKEN }}
       - name: Build
         run: npm run build
